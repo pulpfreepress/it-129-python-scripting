@@ -1,2 +1,6 @@
 # it-129-python-scripting
-Course example repository for IT-129 Python Scripting at Marymount University
+Course example code repository for IT-129-C Python Scripting at Marymount University.
+
+ <img style="background-color:white;" src="images/marymount-logo-1x.png"></img>
+ 
+  
