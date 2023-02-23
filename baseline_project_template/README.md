@@ -19,3 +19,20 @@ The `docs` directory houses project documentation, includeing automatically-gene
 Place all unit and integration test file in the `tests` directory. A test file begins with the string "test".
 
 The `context.py` file, located in the `tests` directory, includes code that adds the `src` directory to the Python system path and imports modules required for unit and integration tests. 
+
+---
+## Run the Application
+To run the main.py module, from the project root directory (the directory this `README.md` file is located) run the following command:
+```
+python src/main.py
+
+```
+
+## Run the Unit Tests
+
+From the root directory run the following commands: (use python or python3 as required)
+```
+pushd tests
+python3 -m unittest -v
+popd
+```
