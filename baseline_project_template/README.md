@@ -8,7 +8,7 @@ Edit this file as required to describe your project and provide additional docum
 
 ## src Directory
 
-The purpose of the `src` directory is short for *source* code. It houses all your project's source code files. Larger projects can group related files into subdirectories. 
+The purpose of the `src` directory (src is short for *source* code.) is to house all your project's source code files. Larger projects can group related files into subdirectories. 
 
 ## docs Directory
 
