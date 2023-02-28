@@ -13,7 +13,8 @@ class ComputerSimulator():
         self.ENTER_PROGRAM_FROM_KEYBOARD = '2'
         self.LOAD_DEMO_PROGRAM = '3'
         self.RUN_PROGRAM = '4'
-        self.QUIT = '5'
+        self.DUMP_MEMORY = '5'
+        self.QUIT = '6'
 
         # memory
         self.memory = [0] * 100
@@ -48,7 +49,8 @@ class ComputerSimulator():
         print('\t2. Enter program from keyboard')
         print('\t3. Load demo program')
         print('\t4. Run program')
-        print('\t5. Quit')
+        print('\t5. Dump memory')
+        print('\t6. Quit')
         print()
 
     def process_menu_choice(self):
@@ -58,6 +60,9 @@ class ComputerSimulator():
         # Get menu selection from user
         user_input = input('Enter menu choice: ')
         print(f'You entered: {user_input}')
+
+        if not user_input:
+            user_input = '0'
 
         # If input is valid menu choice
         # execute menu item
@@ -69,6 +74,7 @@ class ComputerSimulator():
             case self.ENTER_PROGRAM_FROM_KEYBOARD: self.enter_program_from_keyboard()
             case self.LOAD_DEMO_PROGRAM: self.load_demo_program()
             case self.RUN_PROGRAM: self.run_program()
+            case self.DUMP_MEMORY: self.dump_memory()
             case self.QUIT: self.keep_going = False
             case _: print(f'Invalid menu choice...{user_input[0]}')
 
@@ -91,42 +97,102 @@ class ComputerSimulator():
          self.memory[10] = 4300
 
 
-
     def run_program(self):
          print('running program...')
 
-         run = True
-         while run:
+         self.run = True
+         self.program_counter = 0
+
+         while self.run:
             # decode instruction
             instruction = self.memory[self.program_counter]
-            opcode = instruction / 100
+            opcode = int(instruction / 100)
             operand = instruction % 100
             self.program_counter += 1
 
+            if __debug__:
+                print('-' * 15)
+                print(f'opcode: {opcode}')
+                print(f'operand: {operand}')
+                print(f'accumulator: {self.accumulator}')
+                input('Press any key to continue...')
+                print('-' * 15)
+
             # Execute instruction
             match opcode:
-                case self.READ: self.read()
-                case self.WRITE: self.write()
-                case self.LOAD: self.load()
-                case self.STORE: self.store()
-                case self.ADD: self.add()
-                case self.SUB: self.sub()
-                case self.MUL: self.mul()
-                case self.DIV: self.div()
-                case self.BRANCH: self.branch()
-                case self.BRANCHNEG: self.branch_neg()
-                case self.BRANCHZERO: self.branch_zero()
+                case self.READ: self.read(operand)
+                case self.WRITE: self.write(operand)
+                case self.LOAD: self.load(operand)
+                case self.STORE: self.store(operand)
+                case self.ADD: self.add(operand)
+                case self.SUB: self.sub(operand)
+                case self.MUL: self.mul(operand)
+                case self.DIV: self.div(operand)
+                case self.BRANCH: self.branch(operand)
+                case self.BRANCHNEG: self.branch_neg(operand)
+                case self.BRANCHZERO: self.branch_zero(operand)
+                case self.HALT: self.halt()
+                case _: self.halt()
 
 
     def read(self, operand):
+        """Reads numeric input from console and stores it in
+        memory location indicated by operand.
+        """
         user_input = input('Enter numeric value: ')
-        self.memory[operand] = float(user_input)
 
-    def write(self):
+        try:
+            # Convert string input to floating point numeric value
+            # If conversion fails catch exception, warn user, and set value to zero.
+            self.memory[operand] = float(user_input)
+        except Exception as e:
+            print('ERROR: Invalid numeric value entered. Setting value to 0.')
+            self.memory[operand] = 0
 
 
+    def write(self, operand):
+        """Write contents of memory location indicated by operand
+        to console.
+        """
+        print(f'{self.memory[operand]}')
 
+    def load(self, operand):
+        """Load contents of memory location indicated by operand
+        into the accumulator.
+        """
+        self.accumulator = self.memory[operand]
 
+    def store(self, operand):
+        """Store contents of accumulator into memory location indicated
+        by operand.
+        """
+        self.memory[operand] = self.accumulator
+
+    def add(self, operand):
+        pass
+
+    def sub(self, operand):
+        pass
+
+    def mul(self, operand):
+        self.accumulator *= self.memory[operand]
+
+    def div(self, operand):
+        pass
+
+    def branch(self, operand):
+        self.program_counter = operand
+
+    def branch_neg(self, operand):
+        pass
+
+    def branch_zero(self, operand):
+        pass
+
+    def halt(self):
+        self.run = False
+
+    
     def dump_memory(self):
         print(self.memory)
 

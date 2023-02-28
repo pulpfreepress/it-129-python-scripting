@@ -5,10 +5,9 @@ from computer_simulator import ComputerSimulator
 
 def main():
     simulator = ComputerSimulator()
-    #simulator.launch_application()
-    simulator.dump_memory()
-    simulator.load_demo_program()
-    simulator.dump_memory()
+    simulator.launch_application()
+    #simulator.dump_memory()
+   
 
 
 if __name__ == "__main__":
