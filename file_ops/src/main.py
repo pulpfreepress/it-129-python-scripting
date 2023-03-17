@@ -1,23 +1,24 @@
 """Demonstrate Python file Input/Output (I/O)
 """
 
-memory = [1111]*100
+memory = [0]*100
 
 def dump_memory():
     counter = 0
     for instruction in memory:
         counter += 1
-        if (counter % 10) == 0:
+        if (counter % 11) == 0:
             print()
             counter = 0
         else:
-            print(str(instruction) + ' ', end='')
+            print(f'{instruction:4} ', end='')
+            
 
-
-def load_memory_from_file(filename):
+def load_program_from_file():
+    program_file = input("Program Name: ")
     try:
         # Open named file
-        with open(filename, mode="r") as f:
+        with open(program_file, mode="r") as f:
             # read each line
             # and store in memory
             count = 0
@@ -32,7 +33,7 @@ def load_memory_from_file(filename):
 
 
 def main():
-    load_memory_from_file("data/program_1.txt")
+    load_program_from_file()
     dump_memory()
     
 
