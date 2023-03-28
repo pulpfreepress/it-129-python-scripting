@@ -1,10 +1,23 @@
+""" Implements a multithreaded server that echos messages received from
+connected clients. 
+"""
+
 import socket
 import threading
 import sys
 
 
 class Server():
+    """ Implements the Server class.
+    """
     def __init__(self, ip, port):
+        """ Constructor method. Takes two arguments: ip address and port.
+        The ip address is a string in the form of an IPv4 address. 
+        (Example: "127.0.0.1") The port is an integer representing an 
+         operating system port on which the server application listens for
+         incomming connections. (Example: 5500) The port used must not already be
+         used by another application.
+        """
         self.ip = ip
         self.port = port
         self._listen(ip, port)
@@ -12,6 +25,9 @@ class Server():
 
     # Listen for incoming connections
     def _listen(self, ip, port):
+        """ Creates a server socket and starts listening on assigned 
+        IP Address and Port.
+        """
         try:
             self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
@@ -25,6 +41,9 @@ class Server():
 
     # Accept incoming connection
     def _accept_connection(self):
+        """ Accepts incoming client connections and hands off request processing
+        to new thread.
+        """
         try:
             with self.server:
                 while True:
@@ -38,6 +57,8 @@ class Server():
 
     # Process connection in separate thread
     def _process_client_requests(self, client, server):
+        """ Processes communication between client and server. 
+        """
         try:
             with client:
                 while True:
