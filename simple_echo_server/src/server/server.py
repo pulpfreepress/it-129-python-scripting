@@ -5,6 +5,7 @@ connected clients.
 import socket
 import threading
 import sys
+import os
 
 
 class Server():
@@ -30,12 +31,15 @@ class Server():
         """
         try:
             self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+            if os.name == 'nt':
+                self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            else:
+                self.server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
             self.server.bind((ip, port))
             print(f'Listening on IP Address: {ip} and Port: {port} ')
             self.server.listen(4)
         except Exception as e:
-            print(f'Problem listening for incomming connection: {e}')
+            print(f'Problem listening for incoming connection: {e}')
             self.server.close()
             sys.exit(0)
 
