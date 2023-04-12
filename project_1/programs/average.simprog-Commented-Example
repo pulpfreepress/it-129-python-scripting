@@ -1,0 +1,26 @@
+1020 # enter number loop count and store in loc 20
+2020 # Load loop count into accumulator
+2124 # Store starting loop count in loc 24
+1021 # enter decrement value and store in loc 21
+1022 # enter number and store in loc 22
+1023 # enter number and store in loc 23
+2022 # load loc 22 into acc
+3023 # Add loc 23
+2122 # store acc -> loc 22
+2020 # load loop count loc 20 -> acc
+3121 # sub decrement value from in loc 21 from acc
+2120 # store acc -> loc 20
+4215 # If acc == 0 jump to loc 15 to calculate average
+4115 #  or If acc < 0 jump to loc 15 to calculate average
+4005 # If not done Jump to loc 05 and repeat loop
+2022 # Load loc 22 -> acc
+3324 # Divide sum in accumulator by loop count
+2122 # Store acc -> loc 22
+1122 # Write average to console
+4300 # Exit
+0
+0
+0
+0
+0
+0

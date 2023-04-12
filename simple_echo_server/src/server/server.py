@@ -51,7 +51,7 @@ class Server():
         try:
             with self.server:
                 while True:
-                    print(f'Waiting for incoming commection...')
+                    print(f'Waiting for incoming client connection...')
                     client, address = self.server.accept()
                     print(f'Accepted client connection from IP Address: {address[0]} and {address[1]}')
                     client_handler = threading.Thread(target=self._process_client_requests, args=(client, self.server))
