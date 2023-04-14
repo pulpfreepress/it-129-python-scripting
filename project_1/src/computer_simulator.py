@@ -82,18 +82,7 @@ class ComputerSimulator():
 
 
     def load_program_from_file(self):
-        program_file = input("Program Filename: ")
-        try:
-            # Open named file
-            with open(program_file, mode="r") as f:
-                # read each line
-                # and store in memory
-                count = 0
-                for instruction_string in f.readlines():
-                    self.memory[count] = int(instruction_string)
-                    count += 1
-        except Exception as e:
-            print(f'Problem loading program into memory. {e}')
+       print("load_program_from_file() method called.")
         
 
     def enter_program_from_keyboard(self):
@@ -183,27 +172,25 @@ class ComputerSimulator():
         self.memory[operand] = self.accumulator
 
     def add(self, operand):
-        self.accumulator += self.memory[operand]
+        pass
 
     def sub(self, operand):
-        self.accumulator -= self.memory[operand]
+        pass
 
     def mul(self, operand):
         self.accumulator *= self.memory[operand]
 
     def div(self, operand):
-        self.accumulator /= self.memory[operand]
+        pass
 
     def branch(self, operand):
         self.program_counter = operand
 
     def branch_neg(self, operand):
-        if self.accumulator < self.ZERO:
-            self.program_counter = operand
+        pass
 
     def branch_zero(self, operand):
-        if self.accumulator == 0:
-            self.program_counter = operand
+        pass
 
     def halt(self):
         self.run = False
