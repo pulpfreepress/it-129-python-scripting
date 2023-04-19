@@ -3,6 +3,7 @@ will attempt to connect to server. User can send messages to server and
 server will send messages back to the client. 
 """
 import socket
+import json
 
 class Client():
     """ Implements the Client class for the simple echo server example.
@@ -43,9 +44,11 @@ class Client():
     def _process_server_response(self):
         """ Processes server response. Decodes raw data sent from the server."""
         try:
-            response = self.client.recv(1024)
-            message = response.decode('utf-8')
-            print(f'Server response: {message}')
+            raw_response = self.client.recv(2048)
+            response = raw_response.decode('utf-8')
+
+            print('Server response: ')
+            print(response)
         except Exception as e:
             print(f'Problem processing server response: {e}')
 
