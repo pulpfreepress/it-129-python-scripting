@@ -43,4 +43,5 @@ You need to implement at least 3 additional commands.
   - os
   - platform
   - requests
+- Encode data into JSON before returning to client
 
