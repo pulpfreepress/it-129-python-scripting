@@ -25,13 +25,13 @@ class Server():
          incomming connections. (Example: 5500) The port used must not already be
          used by another application.
         """
-        self.ip = ip
-        self.port = port
         self._motivational_message_list = []
         self._initialize_motivational_message_list()
-
+        self.ip = ip
+        self.port = port
         self._listen(ip, port)
         self._accept_connection()
+        
        
 
     # Listen for incoming connections
@@ -92,15 +92,15 @@ class Server():
                             client.send(bytearray(response, 'utf-8'))
 
                         case 'sysinfo':
-                            response = self.sys_info()
+                            response = self._sys_info()
                             client.send(bytearray(response, 'utf-8'))
 
                         case 'motivation':
-                            response = self.motivation(message_list)
+                            response = self._motivation(message_list)
                             client.send(bytearray(response, 'utf-8'))
                             
                         case _: 
-                            response = self.echo(request)
+                            response = self._echo(request)
                             client.send(bytearray(response, 'utf-8'))
                             
 
@@ -114,21 +114,15 @@ class Server():
         self._motivational_message_list.append('You are A-W-E-S-O-M-E!')
         self._motivational_message_list.append('Let nothing stand in your way!')
         self._motivational_message_list.append('Today you may struggle but tomorrow you will SUCCEED!')
-
-
-    def echo(self, message):
-        dictionary = {} # Create a dictionary
-        dictionary['command'] = 'default echo' # Add a key to store the command just executed
-        dictionary['result'] = message # Add a key to store the results
-        return json.dumps(dictionary) # Convert the dictionary into a JSON string with json.dumps() method
+        self._motivational_message_list.append('You look marvelous!')
 
     def _random(self):
-        dictionary = {}
-        dictionary['command'] = 'random'
+        dictionary = {} # Define a dictionary
+        dictionary['command'] = 'random' # Key to store the executed command
         dictionary['results'] = random.randint(0, 1000) # Uses the random library
         return json.dumps(dictionary)
     
-    def sys_info(self):
+    def _sys_info(self):
         dictionary = {} # Create a dictionary
         dictionary['command'] = 'sysinfo'
         dictionary['results'] = {} # Create another dictionary to hold complex results
@@ -139,10 +133,16 @@ class Server():
         dictionary['results']['pythonVersion'] = platform.python_version()
         return json.dumps(dictionary)
     
-    def motivation(self, message_list):
-        max_list_items = len(message_list) - 1
-        random_index = random.randint(0, max_list_items)
+    def _motivation(self, message_list):
+        max_list_index = len(message_list) - 1
+        random_index = random.randint(0, max_list_index)
         dictionary = {}
         dictionary['command'] = 'motivation'
         dictionary['results'] = message_list[random_index]
         return json.dumps(dictionary)
+    
+    def _echo(self, message):
+        dictionary = {} # Create a dictionary
+        dictionary['command'] = 'default echo' # Add a key to store the command just executed
+        dictionary['result'] = message # Add a key to store the results
+        return json.dumps(dictionary) # Convert the dictionary into a JSON string with json.dumps() method
