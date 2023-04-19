@@ -47,8 +47,17 @@ class Client():
             raw_response = self.client.recv(2048)
             response = raw_response.decode('utf-8')
 
-            print('Server response: ')
-            print(response)
+            #print('Server response: ')
+            #print(response)
+
+            # Convert JSON to dictionary
+            # Access the command key
+            # Access the results key
+
+            dictionary = json.loads(response)
+            print(f"Command: {dictionary['command']}")
+            print(f"Results: {dictionary['results']}")
+
         except Exception as e:
             print(f'Problem processing server response: {e}')
 

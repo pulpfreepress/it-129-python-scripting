@@ -144,5 +144,5 @@ class Server():
     def _echo(self, message):
         dictionary = {} # Create a dictionary
         dictionary['command'] = 'default echo' # Add a key to store the command just executed
-        dictionary['result'] = message # Add a key to store the results
+        dictionary['results'] = message # Add a key to store the results
         return json.dumps(dictionary) # Convert the dictionary into a JSON string with json.dumps() method
