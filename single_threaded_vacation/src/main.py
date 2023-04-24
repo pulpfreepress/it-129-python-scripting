@@ -8,7 +8,7 @@ _hungry = True
 
 
 def fetch_drink():
-    steps_to_the_bar = range(5000)
+    steps_to_the_bar = range(500)
     for i in steps_to_the_bar:
         if (i % 99) == 0:
             print()
@@ -23,7 +23,7 @@ def fetch_drink():
 
 
 def fetch_food():
-    steps_to_the_grill = range(5000)
+    steps_to_the_grill = range(500)
     for i in steps_to_the_grill:
         if (i % 99) == 0: 
             print()
