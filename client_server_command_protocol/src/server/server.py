@@ -115,6 +115,7 @@ class Server():
         self._motivational_message_list.append('Let nothing stand in your way!')
         self._motivational_message_list.append('Today you may struggle but tomorrow you will SUCCEED!')
         self._motivational_message_list.append('You look marvelous!')
+        self._motivational_message_list.append('Wow! That color flatters you!')
 
     def _random(self):
         dictionary = {} # Define a dictionary
