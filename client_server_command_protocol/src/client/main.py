@@ -8,7 +8,8 @@ enters 'quit' or 'shutdown server'.
 from client import Client
 
 def main():
-    c1 = Client("127.0.0.1", 5500)
+    ip_address = input('Server IP: ')
+    c1 = Client(ip_address, 5500)
     message = ""
     while (message != 'quit') and (message != 'shutdown server'):
         message = input("Enter message to server: ")
